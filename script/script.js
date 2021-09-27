@@ -12,19 +12,18 @@ function popupAlert(msg, type = 'warning') {
       <button type="button" id="btn-close" class="btn-close position-absolute end-0"></button>
     </div>
   `;
+
   const closeBtn = document.getElementById('btn-close');
   closeBtn.addEventListener('click', () =>  alertMsg.classList.remove('show'));
   alertMsg.classList.add('show');
   setTimeout(() => {
     alertMsg.classList.remove('show');
   }, 3000)
-
-  
 }
 
 // fetch own country data
 async function searchStates(searchText) {
-  const res = await fetch("/js練習/weather-app/script/countries.json");
+  const res = await fetch("https://gist.githubusercontent.com/tommm2/3bc8a64caf02941d6ee15a67ba3f1df0/raw/eb1eedb8c2d33b094331b7da78c3545eeb6c9dea/countries.json");
   const states = await res.json();
 
   // 取得目前輸入文字後篩選的國家
@@ -54,7 +53,6 @@ async function getCountryWeahter(country) {
 
   search.value = '';
   matchList.innerHTML = '';
-  console.log(data);
   if(data.cod === 200) {
     updateWeatherUI(data);
   } else {
