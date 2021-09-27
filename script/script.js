@@ -24,7 +24,7 @@ function popupAlert(msg, type = 'warning') {
 
 // fetch own country data
 async function searchStates(searchText) {
-  const res = await fetch("http://gist.githubusercontent.com/tommm2/3bc8a64caf02941d6ee15a67ba3f1df0/raw/eb1eedb8c2d33b094331b7da78c3545eeb6c9dea/countries.json");
+  const res = await fetch("https://gist.githubusercontent.com/tommm2/3bc8a64caf02941d6ee15a67ba3f1df0/raw/eb1eedb8c2d33b094331b7da78c3545eeb6c9dea/countries.json");
   const states = await res.json();
 
   // 取得目前輸入文字後篩選的國家
@@ -48,7 +48,7 @@ async function searchStates(searchText) {
 // fetch openweatherapi
 async function getCountryWeahter(country) {
   const api_key = "c0c533d0d20d663add933b306f6b82e4";
-  const api_url = `http://api.openweathermap.org/data/2.5/weather?q=${country}&appid=${api_key}`;
+  const api_url = `https://api.openweathermap.org/data/2.5/weather?q=${country}&appid=${api_key}`;
   const res = await fetch(api_url);
   
   if(res.status !== 200) {
@@ -108,7 +108,7 @@ function updateWeatherUI(country) {
       </div>
       <div class="d-flex flex-column justify-content-center align-items-center px-3">
         <span class="fs-1 d-block">${weather[0].main}</span>
-        <img src="http://openweathermap.org/img/wn/${weather[0].icon}@2x.png" alt="weather-icon">
+        <img src="https://openweathermap.org/img/wn/${weather[0].icon}@2x.png" alt="weather-icon">
       </div>
       <div class="d-flex justify-content-around align-items-center">
         <div>
