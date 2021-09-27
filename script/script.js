@@ -3,7 +3,7 @@ const matchList = document.getElementById("match-list");
 const weahterUI = document.getElementById("weather-ui");
 const alertMsg = document.getElementById("alert-msg");
 const loading = document.getElementById("loading");
-
+const form = document.getElementById("form");
 // popup alert message
 function popupAlert(msg, type = 'warning') {
   alertMsg.innerHTML = `
@@ -60,13 +60,12 @@ async function getCountryWeahter(country) {
     setTimeout(() => {
       updateWeatherUI(data);
       loading.classList.remove('show');
-    }, 1000)
+    }, 1000);
   }
 
   search.value = '';
   matchList.innerHTML = '';
 }
-
 
 // 開氏溫度轉攝氏溫度
 function foramtTemp(k) {
@@ -142,6 +141,10 @@ function updateWeatherUI(country) {
 
 // Event Listener
 search.addEventListener("input", () => searchStates(search.value));
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  getCountryWeahter(search.value);
+})
 matchList.addEventListener("click", (e) => {
   if(e.target.id === 'card') {
     const country = e.target.dataset.country;
