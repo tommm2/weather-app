@@ -2,6 +2,7 @@ const search = document.getElementById("search");
 const matchList = document.getElementById("match-list");
 const weahterUI = document.getElementById("weather-ui");
 const alertMsg = document.getElementById("alert-msg");
+const loading = document.getElementById("loading");
 
 // popup alert message
 function popupAlert(msg, type = 'warning') {
@@ -49,15 +50,21 @@ async function getCountryWeahter(country) {
   const api_key = "c0c533d0d20d663add933b306f6b82e4";
   const api_url = `https://api.openweathermap.org/data/2.5/weather?q=${country}&appid=${api_key}`;
   const res = await fetch(api_url);
-  const data = await res.json();
+  
+  if(res.status !== 200) {
+    popupAlert('City not found', 'warning');
+  } else {
+    loading.classList.add('show');
+    const data = await res.json();
+    
+    setTimeout(() => {
+      updateWeatherUI(data);
+      loading.classList.remove('show');
+    }, 1000)
+  }
 
   search.value = '';
   matchList.innerHTML = '';
-  if(data.cod === 200) {
-    updateWeatherUI(data);
-  } else {
-    popupAlert('City not found', 'warning')
-  }
 }
 
 
@@ -101,7 +108,7 @@ function updateWeatherUI(country) {
       </div>
       <div class="d-flex flex-column justify-content-center align-items-center px-3">
         <span class="fs-1 d-block">${weather[0].main}</span>
-        <img src="http://openweathermap.org/img/wn/${weather[0].icon}@2x.png" alt="weather-icon">
+        <img src="https://openweathermap.org/img/wn/${weather[0].icon}@2x.png" alt="weather-icon">
       </div>
       <div class="d-flex justify-content-around align-items-center">
         <div>
