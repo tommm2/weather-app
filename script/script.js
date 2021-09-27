@@ -47,7 +47,7 @@ async function searchStates(searchText) {
 // fetch openweatherapi
 async function getCountryWeahter(country) {
   const api_key = "c0c533d0d20d663add933b306f6b82e4";
-  const api_url = `http://api.openweathermap.org/data/2.5/weather?q=${country}&appid=${api_key}`;
+  const api_url = `https://api.openweathermap.org/data/2.5/weather?q=${country}&appid=${api_key}`;
   const res = await fetch(api_url);
   const data = await res.json();
 
