@@ -4,6 +4,8 @@ const weahterUI = document.getElementById("weather-ui");
 const alertMsg = document.getElementById("alert-msg");
 const loading = document.getElementById("loading");
 const form = document.getElementById("form");
+
+const cacheData = JSON.parse(localStorage.getItem('country')) || [];
 // popup alert message
 function popupAlert(msg, type = 'warning') {
   alertMsg.innerHTML = `
@@ -54,9 +56,9 @@ async function getCountryWeahter(country) {
   if(res.status !== 200) {
     popupAlert('City not found', 'warning');
   } else {
-    loading.classList.add('show');
     const data = await res.json();
-    
+    loading.classList.add('show');
+    localStorage.setItem('country', JSON.stringify(data));
     setTimeout(() => {
       updateWeatherUI(data);
       loading.classList.remove('show');
@@ -137,7 +139,11 @@ function updateWeatherUI(country) {
   `
   weahterUI.innerHTML = str;
 }
-// updateWeatherUI(tempData);
+
+if(cacheData.length !== 0) {
+  updateWeatherUI(cacheData);
+}
+
 
 // Event Listener
 search.addEventListener("input", () => searchStates(search.value));
