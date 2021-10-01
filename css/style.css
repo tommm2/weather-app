@@ -10,7 +10,7 @@ h3 {
   text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
 }
 
-h4 {
+h4, i {
   pointer-events: none;
 }
 
@@ -116,6 +116,9 @@ h4 {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   background: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(5px);
+}
+.weather-ui .focus-city {
+  cursor: pointer;
 }
 
 /* width */

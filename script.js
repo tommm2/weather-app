@@ -6,8 +6,8 @@ const loading = document.getElementById("loading");
 const form = document.getElementById("form");
 
 const cacheData = JSON.parse(localStorage.getItem('country')) || [];
-// popup alert message
-function popupAlert(msg, type = 'warning') {
+// slideDown alert message
+function slideDown(msg, type = 'warning') {
   alertMsg.innerHTML = `
     <div class="alert alert-${type}">
       <i class="fas fa-exclamation-circle"></i>
@@ -54,7 +54,7 @@ async function getCountryWeahter(country) {
   const res = await fetch(api_url);
   
   if(res.status !== 200) {
-    popupAlert('City not found', 'warning');
+    slideDown('City not found', 'warning');
   } else {
     const data = await res.json();
     loading.classList.add('show');
